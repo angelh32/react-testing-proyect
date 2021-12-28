@@ -5,14 +5,15 @@ import BookComponent from "./BookComponent";
 import "./BookSearchResults.css";
 
 interface ShowBookResultsProps {
-  currentList: Book[]
- }
+  currentList: Book[];
+  setCurrent: (current: Book) => void;
+}
 
-const ShowSearchResults: React.FC<ShowBookResultsProps> = (props) => {
-  const { currentList } = props;
+const BookSearchResults: React.FC<ShowBookResultsProps> = (props) => {
+  const { currentList, setCurrent } = props;
 
   const listItems = currentList.map((media) => {
-    return <BookComponent book={media} />;
+    return <BookComponent book={media} setCurrent={setCurrent} />;
   });
   if (currentList.length == 0) {
     return <h5>No results :(</h5>;
@@ -24,4 +25,4 @@ const ShowSearchResults: React.FC<ShowBookResultsProps> = (props) => {
   );
 };
 
-export default ShowSearchResults
+export default BookSearchResults

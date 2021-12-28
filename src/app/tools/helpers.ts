@@ -28,8 +28,7 @@ export const callApi = (url: string) => {
 
 export const callApiBook = (searchInfo: string) => {
     const searchFormat = searchInfo.toLowerCase().replace(new RegExp(" ", 'g'), "-");
-    console.log("LX - searchFormat", searchFormat)
-    return callApi(`http://openlibrary.org/search.json?q=${searchInfo}&page=1`)
+    return callApi(`http://openlibrary.org/search.json?q=${searchFormat}&page=1`)
         .then(apicall => apicall.json())
         .then(resJson => apiToBooks(resJson as ApiBooksResults))
 }
