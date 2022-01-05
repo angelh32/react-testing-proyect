@@ -7,6 +7,8 @@ import {createMemoryHistory} from 'history'
 import { AppContext } from './BookContext';
 import { StepButton } from '@mui/material';
 import Sinon from "sinon";
+import BookDetails from './BookDetails';
+
 
 const mockBooks: Book[] = [
   {
@@ -18,7 +20,7 @@ const mockBooks: Book[] = [
 
 const setCurrent = Sinon.spy();
 
-describe('<BookComponent />', () => {
+describe('<BookDetails />', () => {
   function renderComponent(props: Partial<BookComponentProps> = {}) {
     const defaultProps: BookComponentProps = {
       book: mockBooks[0],
@@ -27,9 +29,9 @@ describe('<BookComponent />', () => {
     const history = createMemoryHistory();
 
     return render(
-      <AppContext.Provider value={{ setCurrent }}>
+      <AppContext.Provider value={{ currentSelected: mockBooks[0] }}>
         <Router>
-          <BookComponent {...defaultProps} {...props} />
+          <BookDetails {...defaultProps} {...props} />
         </Router>
       </AppContext.Provider>,
     );
@@ -39,14 +41,6 @@ describe('<BookComponent />', () => {
     test('it show the card properly', async () => {
       const { queryAllByText } = renderComponent();
       expect(queryAllByText('test')[0]).toHaveTextContent('test');
-      expect(queryAllByText('author 1')[0]).toHaveTextContent('author 1');
-    });
-  });
-  describe("When the user click the link", () => {
-    test('it redirects to another page', async () => {
-      const { getByText } = renderComponent();
-      fireEvent.click(getByText("test"));
-      Sinon.assert.calledOnce(setCurrent);
     });
   });
 });

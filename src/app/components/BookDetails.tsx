@@ -2,18 +2,16 @@ import { Grid } from '@mui/material';
 import * as React from "react";
 import { Book } from '../types/types';
 import BookComponent from "./BookComponent";
-import "./BookSearchResults.css";
+import { AppContext } from './BookContext';
 
 interface BookDetailsProps {
-  currentBook: Book
  }
 
 const BookDetails: React.FC<BookDetailsProps> = (props) => {
-  const { currentBook } = props;
-  console.log("LX - currentBook", currentBook)
+  const { currentSelected } = React.useContext(AppContext);
 
   return (
-    <p>{currentBook.name}</p>
+    <p>{currentSelected.name}</p>
   );
 };
 

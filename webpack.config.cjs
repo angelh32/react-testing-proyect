@@ -8,8 +8,12 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'esbuild-loader',
         exclude: /node_modules/,
+        options:{
+          loader: "tsx",
+          target: "es2015"
+        }
       },
       {
         test: /\.css$/i,
